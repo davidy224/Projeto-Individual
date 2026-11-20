@@ -49,9 +49,9 @@ Consolidar na prática os conhecimentos de desenvolvimento web utilizando a arqu
 
 ## 🖥️ O Que a Solução Faz (Escopo Funcional)
 
-A aplicação é composta por **6 páginas oficiais**, divididas entre a área pública (atualmente implementada no diretório `web-data-viz/kkl/`) e a área autenticada:
+A aplicação é composta por **6 páginas oficiais**, divididas entre a área pública (implementada em `valora/public/`) e a área autenticada:
 
-### Área Pública (Diretório `kkl/`)
+### Área Pública (`valora/public/`)
 1. **Landing Page (`index.html`)**: Apresenta a proposta do Valora, resumo das funcionalidades (Cadastro de Partidas, Dashboard Pessoal, Rank/Pontos e Jogo da Memória) e chamadas para ação (Criar Conta / Entrar).
 2. **Cadastro de Usuário (`cadastro.html`)**: Permite criar uma conta informando:
    - `Nome`
@@ -95,7 +95,7 @@ O sistema gerencia a progressão competitiva percorrendo a hierarquia oficial de
 
 ## 🗄️ Arquitetura e Modelagem do Banco de Dados
 
-O banco de dados MySQL chama-se **`valora`** e utiliza um modelo relacional direto com **3 tabelas principais** (`1:N` a partir de `usuario`), definido em [`web-data-viz/src/database/script-tabelas.sql`](web-data-viz/src/database/script-tabelas.sql):
+O banco de dados MySQL chama-se **`valora`** e utiliza um modelo relacional direto com **3 tabelas principais** (`1:N` a partir de `usuario`), definido em [`valora/src/database/script-tabelas.sql`](valora/src/database/script-tabelas.sql):
 
 ```mermaid
 erDiagram
@@ -173,23 +173,33 @@ erDiagram
 ```text
 Projeto-Individual/
 ├── README.md
-└── web-data-viz/
+└── valora/
     ├── app.js                         # Ponto de entrada do servidor Node/Express
     ├── package.json                   # Dependências e scripts npm
-    ├── kkl/                           # Páginas oficiais desenvolvidas para o Valora
-    │   ├── index.html                 # Landing Page oficial
+    ├── public/                        # Diretório estático servido pelo Express
+    │   ├── index.html                 # Landing Page oficial do Valora
     │   ├── login.html                 # Página de Login
     │   ├── cadastro.html              # Página de Cadastro (com Rank e Pontos RR)
-    │   └── inicial.css                # Folha de estilos das páginas iniciais
-    ├── img/                           # Imagens de fundo e assets visuais do Valora
-    ├── public/                        # Diretório estático servido pelo Express (template/integração)
+    │   ├── css/
+    │   │   └── inicial.css            # Folha de estilos das páginas iniciais
+    │   ├── js/                        # Scripts de front-end
+    │   └── assets/
+    │       └── imgs/                  # Imagens de fundo e assets visuais do Valora
+    │           ├── cadastro.jpg
+    │           ├── fundo.png
+    │           ├── imagens.jpeg
+    │           └── login.jpg
     └── src/
         ├── controllers/               # Lógica de controle das requisições da API
+        │   └── usuarioController.js
         ├── database/
         │   ├── config.js              # Configuração de conexão com o MySQL
         │   └── script-tabelas.sql     # Script DDL de criação do banco 'valora' e suas 3 tabelas
         ├── models/                    # Consultas SQL executadas no MySQL
+        │   └── usuarioModel.js
         └── routes/                    # Definição dos endpoints da API Express
+            ├── index.js
+            └── usuarios.js
 ```
 
 ---
@@ -205,15 +215,15 @@ Projeto-Individual/
 1. **Clone o repositório:**
    ```bash
    git clone <URL_DO_REPOSITORIO>
-   cd Projeto-Individual/web-data-viz
+   cd Projeto-Individual/valora
    ```
 
 2. **Configure o Banco de Dados MySQL:**
    - Abra o seu MySQL Workbench ou terminal MySQL.
-   - Execute o script localizado em [`src/database/script-tabelas.sql`](web-data-viz/src/database/script-tabelas.sql) para criar o banco `valora` e as tabelas `usuario`, `partida` e `jogo_memoria`.
+   - Execute o script localizado em [`src/database/script-tabelas.sql`](valora/src/database/script-tabelas.sql) para criar o banco `valora` e as tabelas `usuario`, `partida` e `jogo_memoria`.
 
 3. **Configure as Variáveis de Ambiente (`.env.dev`):**
-   - Verifique/crie o arquivo `.env.dev` na pasta `web-data-viz/` com as credenciais do seu MySQL local:
+   - Verifique/crie o arquivo `.env.dev` na pasta `valora/` com as credenciais do seu MySQL local:
      ```env
      AMBIENTE_PROCESSO=desenvolvimento
      APP_HOST=localhost
