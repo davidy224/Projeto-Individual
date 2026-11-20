@@ -1,58 +1,70 @@
--- Arquivo de apoio, caso você queira criar tabelas como as aqui criadas para a API funcionar.
--- Você precisa executar os comandos no banco de dados para criar as tabelas,
--- ter este arquivo aqui não significa que a tabela em seu BD estará como abaixo!
+-- ============================================================================
+-- PROJETO INDIVIDUAL: VALORA (VALORANT TRACKER & JOGO DA MEMÓRIA)
+-- Script de criação do Banco de Dados e Tabelas (MySQL)
+-- ============================================================================
 
-/*
-comandos para mysql server
-*/
+CREATE DATABASE IF NOT EXISTS valora;
+USE valora;
 
-CREATE DATABASE aquatech;
-
-USE aquatech;
-
-CREATE TABLE empresa (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	razao_social VARCHAR(50),
-	cnpj CHAR(14),
-	codigo_ativacao VARCHAR(50)
+-- ----------------------------------------------------------------------------
+-- 1. Tabela USUARIO
+-- Armazena os dados cadastrais do jogador, seu Rank atual e seus Pontos (RR).
+-- ----------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS usuario (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(80) NOT NULL,
+    nick VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    senha VARCHAR(255) NOT NULL,
+    rank_atual VARCHAR(30) NOT NULL DEFAULT 'Ferro 1',
+    pontos_rr INT NOT NULL DEFAULT 0,
+    dt_cadastro DATETIME DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT chk_pontos_rr CHECK (pontos_rr >= 0)
 );
 
-CREATE TABLE usuario (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	nome VARCHAR(50),
-	email VARCHAR(50),
-	senha VARCHAR(50),
-	fk_empresa INT,
-	FOREIGN KEY (fk_empresa) REFERENCES empresa(id)
+-- ----------------------------------------------------------------------------
+-- 2. Tabela PARTIDA
+-- Registra cada partida competitiva jogada pelo usuário (Relacionamento 1:N).
+-- ----------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS partida (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    fk_usuario INT NOT NULL,
+    mapa VARCHAR(40) NOT NULL,
+    agente VARCHAR(40) NOT NULL,
+    resultado VARCHAR(15) NOT NULL,
+    rounds_ganhos INT NOT NULL,
+    rounds_perdidos INT NOT NULL,
+    kills INT NOT NULL,
+    mortes INT NOT NULL,
+    assistencias INT NOT NULL,
+    variacao_rr INT NOT NULL,
+    rank_apos_partida VARCHAR(30) NOT NULL,
+    dt_partida DATETIME DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT chk_resultado CHECK (resultado IN ('Vitória', 'Derrota', 'Empate')),
+    CONSTRAINT chk_estatisticas_positivas CHECK (
+        rounds_ganhos >= 0 AND
+        rounds_perdidos >= 0 AND
+        kills >= 0 AND
+        mortes >= 0 AND
+        assistencias >= 0
+    ),
+    CONSTRAINT fk_partida_usuario FOREIGN KEY (fk_usuario)
+        REFERENCES usuario(id)
+        ON DELETE CASCADE
 );
 
-CREATE TABLE aviso (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	titulo VARCHAR(100),
-	descricao VARCHAR(150),
-	fk_usuario INT,
-	FOREIGN KEY (fk_usuario) REFERENCES usuario(id)
+-- ----------------------------------------------------------------------------
+-- 3. Tabela JOGO_MEMORIA
+-- Registra cada partida concluída no Jogo da Memória dos Agentes (1:N).
+-- ----------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS jogo_memoria (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    fk_usuario INT NOT NULL,
+    jogadas INT NOT NULL,
+    tempo_segundos INT DEFAULT NULL,
+    dt_jogo DATETIME DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT chk_jogadas CHECK (jogadas > 0),
+    CONSTRAINT fk_memoria_usuario FOREIGN KEY (fk_usuario)
+        REFERENCES usuario(id)
+        ON DELETE CASCADE
 );
-
-create table aquario (
-/* em nossa regra de negócio, um aquario tem apenas um sensor */
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	descricao VARCHAR(300),
-	fk_empresa INT,
-	FOREIGN KEY (fk_empresa) REFERENCES empresa(id)
-);
-
-/* esta tabela deve estar de acordo com o que está em INSERT de sua API do arduino - dat-acqu-ino */
-
-create table medida (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	temperatura DECIMAL,
-	momento DATETIME,
-	fk_aquario INT,
-	FOREIGN KEY (fk_aquario) REFERENCES aquario(id)
-);
-
-insert into empresa (razao_social, codigo_ativacao) values ('Empresa 1', 'ED145B');
-insert into empresa (razao_social, codigo_ativacao) values ('Empresa 2', 'A1B2C3');
-insert into aquario (descricao, fk_empresa) values ('Aquário de Estrela-do-mar', 1);
-insert into aquario (descricao, fk_empresa) values ('Aquário de Peixe-dourado', 2);
