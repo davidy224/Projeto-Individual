@@ -15,6 +15,8 @@ var app = express();
 
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
+var partidaRouter = require("./src/routes/partidas");
+var memoriaRouter = require("./src/routes/memoria");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -24,6 +26,8 @@ app.use(cors());
 
 app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
+app.use("/partidas", partidaRouter);
+app.use("/memoria", memoriaRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`

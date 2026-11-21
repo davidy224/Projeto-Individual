@@ -31,13 +31,13 @@
         </div>
         <div class="caixa">
           <div class="rotulo">K/D/A</div>
-          <div class="valor-grande">1,34</div>
-          <div class="rotulo">42 K / 31 D / 18 A</div>
+          <div class="valor-grande" id="dkda">0,00</div>
+          <div class="rotulo" id="dkdaDetalhe">0 K / 0 D / 0 A</div>
         </div>
         <div class="caixa">
           <div class="rotulo">Win rate</div>
-          <div class="valor-grande destaque-vermelho">58%</div>
-          <div class="rotulo">7 vitórias em 12</div>
+          <div class="valor-grande destaque-vermelho" id="dwr">0%</div>
+          <div class="rotulo" id="dwrDetalhe">0 vitórias em 0</div>
         </div>
       </div>
 
@@ -60,18 +60,18 @@
         <div class="caixa">
           <div class="rotulo">Agente favorito</div>
           <div id="dfav" class="icone-favorito"></div>
-          <div class="valor-grande">Jett</div>
-          <div class="destaque-vermelho">9 partidas</div>
+          <div class="valor-grande" id="dfavNome">-</div>
+          <div class="destaque-vermelho" id="dfavQtd">0 partidas</div>
         </div>
         <div class="caixa">
           <div class="rotulo">Melhor mapa</div>
-          <div class="valor-grande">Ascent</div>
-          <div class="destaque-verde">80% de vitórias</div>
+          <div class="valor-grande" id="dmelhorMapa">-</div>
+          <div class="destaque-verde" id="dmelhorMapaWr">0% de vitórias</div>
         </div>
         <div class="caixa">
           <div class="rotulo">Pior mapa</div>
-          <div class="valor-grande">Bind</div>
-          <div class="destaque-vermelho">25% de vitórias</div>
+          <div class="valor-grande" id="dpiorMapa">-</div>
+          <div class="destaque-vermelho" id="dpiorMapaWr">0% de vitórias</div>
         </div>
       </div>
 
@@ -83,24 +83,7 @@
           <span>K</span>
           <span>D</span>
         </div>
-        <div class="linha-historico">
-          <span class="tag vitoria">Vitória</span>
-          <span>Ascent, Jett</span>
-          <span>21</span>
-          <span>12</span>
-        </div>
-        <div class="linha-historico">
-          <span class="tag derrota">Derrota</span>
-          <span>Bind, Reyna</span>
-          <span>15</span>
-          <span>18</span>
-        </div>
-        <div class="linha-historico">
-          <span class="tag vitoria">Vitória</span>
-          <span>Haven, Jett</span>
-          <span>19</span>
-          <span>10</span>
-        </div>
+        <div id="listaHistorico"></div>
       </div>
     </main>
   </div>

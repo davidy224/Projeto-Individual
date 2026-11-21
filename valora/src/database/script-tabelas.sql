@@ -3,7 +3,8 @@
 -- Script de criação do Banco de Dados e Tabelas (MySQL)
 -- ============================================================================
 
-CREATE DATABASE IF NOT EXISTS valora;
+SET NAMES utf8mb4;
+CREATE DATABASE IF NOT EXISTS valora CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE valora;
 
 -- ----------------------------------------------------------------------------
@@ -70,7 +71,18 @@ CREATE TABLE IF NOT EXISTS jogo_memoria (
 );
 
 -- ----------------------------------------------------------------------------
--- Usuário inicial para teste de login
+-- Dados iniciais para o usuário de teste
 -- ----------------------------------------------------------------------------
-INSERT IGNORE INTO usuario (nome, nick, email, senha, rank_atual, pontos_rr)
-VALUES ('Jett', 'Jett_BR#1234', 'jett@email.com', '123456', 'Platina 2', 47);
+INSERT IGNORE INTO usuario (id, nome, nick, email, senha, rank_atual, pontos_rr)
+VALUES (1, 'Jett', 'Jett_BR#1234', 'jett@email.com', '123456', 'Platina 2', 47);
+
+INSERT INTO partida (fk_usuario, mapa, agente, resultado, rounds_ganhos, rounds_perdidos, kills, mortes, assistencias, variacao_rr, rank_apos_partida, dt_partida)
+VALUES
+    (1, 'Ascent', 'Jett', 'Vitória', 13, 8, 18, 14, 4, 20, 'Platina 2', '2026-11-16 19:00:00'),
+    (1, 'Split', 'Omen', 'Vitória', 13, 10, 22, 15, 7, 19, 'Platina 2', '2026-11-17 20:00:00'),
+    (1, 'Haven', 'Jett', 'Vitória', 13, 7, 19, 10, 6, 22, 'Platina 2', '2026-11-18 21:00:00'),
+    (1, 'Bind', 'Reyna', 'Derrota', 9, 13, 15, 18, 3, -16, 'Platina 2', '2026-11-19 21:30:00'),
+    (1, 'Ascent', 'Jett', 'Vitória', 13, 9, 21, 12, 5, 21, 'Platina 2', '2026-11-20 22:00:00');
+
+INSERT INTO jogo_memoria (fk_usuario, jogadas, tempo_segundos)
+VALUES (1, 14, 45);

@@ -1,22 +1,56 @@
+var idUsuario = Number(sessionStorage.ID_USUARIO) || 1;
 var mc = [];
 var mo = [];
 var mm = 0;
 var mp = 0;
 var mlock = false;
-var mbest = mlerMelhor();
+var mbest = 0;
 
-function mlerMelhor() {
-  try {
-    return Number(localStorage.getItem("valora_melhor")) || 0;
-  } catch (e) {
-    return 0;
-  }
+function carregarMelhorPartidaBanco() {
+  fetch("/memoria/estatisticas/" + idUsuario)
+    .then(function (resposta) {
+      if (resposta.ok) {
+        return resposta.json();
+      }
+      throw new Error("Falha ao carregar recorde do banco.");
+    })
+    .then(function (dados) {
+      if (dados && dados.melhor_partida) {
+        mbest = Number(dados.melhor_partida);
+        document.getElementById("mbs").textContent = mbest;
+      }
+    })
+    .catch(function (erro) {
+      console.log(erro);
+    });
 }
 
-function msalvarMelhor(v) {
-  try {
-    localStorage.setItem("valora_melhor", String(v));
-  } catch (e) {}
+function salvarPartidaMemoriaBanco(jogadas) {
+  fetch("/memoria/registrar", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      idUsuarioServer: idUsuario,
+      jogadasServer: jogadas
+    })
+  })
+    .then(function (resposta) {
+      if (resposta.ok) {
+        return resposta.json();
+      }
+      throw new Error("Falha ao registrar partida da memória.");
+    })
+    .then(function (dados) {
+      if (dados && dados.melhor_partida) {
+        mbest = Number(dados.melhor_partida);
+        document.getElementById("mbs").textContent = mbest;
+      }
+    })
+    .catch(function (erro) {
+      console.log(erro);
+    });
 }
 
 function mdraw() {
@@ -116,11 +150,11 @@ function mflip(i) {
         var novo = !mbest || mm < mbest;
         if (novo) {
           mbest = mm;
-          msalvarMelhor(mm);
         }
+        salvarPartidaMemoriaBanco(mm);
         var m = document.getElementById("mmsg");
         m.style.color = "#1fc99a";
-        m.textContent = "Vitória! Todos os pares em " + mm + " jogadas." + (novo ? " Nova melhor partida!" : "");
+        m.textContent = "Vitória! Todos os pares em " + mm + " jogadas." + (novo ? " Nova melhor partida salva!" : " Partida salva!");
       }
     } else {
       mlock = true;
@@ -140,4 +174,5 @@ function mflip(i) {
 }
 
 document.getElementById("mre").onclick = mnew;
+carregarMelhorPartidaBanco();
 mnew();

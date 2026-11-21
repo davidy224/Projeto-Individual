@@ -3,9 +3,16 @@ var formLogin = document.getElementById("formLogin");
 formLogin.addEventListener("submit", function (evento) {
   evento.preventDefault();
 
-  var emailVar = document.getElementById("email").value;
+  var emailVar = document.getElementById("email").value.trim();
   var senhaVar = document.getElementById("senha").value;
   var mensagem = document.getElementById("mensagem");
+
+  if (!emailVar || !senhaVar) {
+    mensagem.textContent = "Preencha e-mail e senha.";
+    return;
+  }
+
+  mensagem.textContent = "";
 
   fetch("/usuarios/autenticar", {
     method: "POST",

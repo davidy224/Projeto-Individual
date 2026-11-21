@@ -176,8 +176,8 @@ h3 {
 }
 
 .icone-favorito {
-  width: 56px;
-  margin: 4px auto 0 auto;
+  width: 64px;
+  margin: 6px auto 2px auto;
 }
 
 .topo-agente {
@@ -189,6 +189,15 @@ h3 {
 
 .icone-agente {
   width: 84px;
+}
+
+.foto-agente {
+  width: 100%;
+  height: auto;
+  display: block;
+  background-color: #0c1117;
+  border: 2px solid #ff4655;
+  box-sizing: border-box;
 }
 
 .linha-campos {
@@ -273,19 +282,20 @@ select {
   cursor: default;
 }
 
-.carta-memoria svg {
-  width: 60%;
+.carta-memoria svg,
+.carta-memoria .foto-agente {
+  width: 64%;
   height: auto;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
 .carta-memoria .nome-agente {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: bold;
   text-transform: uppercase;
 }
 
 .carta-memoria .funcao-agente {
-  font-size: 12px;
+  font-size: 11px;
   text-transform: uppercase;
 }
