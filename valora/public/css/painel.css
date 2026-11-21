@@ -1,0 +1,291 @@
+body {
+  margin: 0;
+  background-color: #0c1117;
+  color: white;
+  font-family: Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.painel {
+  display: flex;
+  min-height: 100vh;
+}
+
+.menu-lateral {
+  width: 220px;
+  background-color: #131b24;
+  border-top: 4px solid #ff4655;
+  padding: 20px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-sizing: border-box;
+}
+
+.marca {
+  font-size: 26px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  letter-spacing: 2px;
+}
+
+.saudacao {
+  color: #9aa6b2;
+  margin: 8px 0 10px 0;
+  font-size: 16px;
+}
+
+.saudacao b {
+  color: #ff4655;
+}
+
+.item-menu {
+  display: block;
+  background-color: #0c1117;
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 10px 14px;
+  border: 1px solid #26323f;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.item-menu:hover {
+  border-color: #ff4655;
+  color: #ff4655;
+}
+
+.item-menu.ativo {
+  background-color: #ff4655;
+  border-color: #ff4655;
+  color: white;
+}
+
+.sair {
+  margin-top: auto;
+}
+
+.conteudo-principal {
+  flex: 1;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.conteudo-principal h2 {
+  font-size: 32px;
+  margin-bottom: 4px;
+}
+
+.subtitulo {
+  color: #9aa6b2;
+  margin: 0 0 18px 0;
+}
+
+.grade-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.grade-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.caixa {
+  background-color: #131b24;
+  border-left: 3px solid #ff4655;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.caixa h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.caixa-formulario {
+  max-width: 580px;
+}
+
+.caixa-memoria {
+  max-width: 520px;
+}
+
+.caixa-grafico {
+  height: 260px;
+  position: relative;
+}
+
+.rotulo {
+  color: #9aa6b2;
+  font-size: 15px;
+}
+
+.valor-grande {
+  font-size: 30px;
+  font-weight: bold;
+  margin: 4px 0;
+}
+
+.destaque-vermelho {
+  color: #ff4655;
+}
+
+.destaque-verde {
+  color: #1fc99a;
+}
+
+.linha-historico {
+  display: grid;
+  grid-template-columns: 90px 1fr 50px 50px;
+  gap: 10px;
+  padding: 8px 0;
+  border-top: 1px solid #26323f;
+  align-items: center;
+}
+
+.tag {
+  text-align: center;
+  font-size: 14px;
+  padding: 2px 6px;
+  font-weight: bold;
+}
+
+.vitoria {
+  background-color: #1fc99a;
+  color: #06251d;
+}
+
+.derrota {
+  background-color: #ff4655;
+  color: white;
+}
+
+.icone-favorito {
+  width: 56px;
+  margin: 4px auto 0 auto;
+}
+
+.topo-agente {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.icone-agente {
+  width: 84px;
+}
+
+.linha-campos {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0 14px;
+}
+
+label {
+  display: block;
+  color: #9aa6b2;
+  font-size: 14px;
+  margin: 12px 0 4px 0;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 10px;
+  background-color: #0c1117;
+  color: white;
+  border: 1px solid #26323f;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+.botao-acao {
+  display: block;
+  width: 100%;
+  margin-top: 18px;
+  padding: 12px;
+  background-color: #ff4655;
+  color: white;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.botao-acao:hover {
+  background-color: #e03543;
+}
+
+.aviso {
+  min-height: 22px;
+  margin-top: 10px;
+  color: #1fc99a;
+}
+
+.centralizado {
+  text-align: center;
+}
+
+.grade-memoria {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.carta-memoria {
+  aspect-ratio: 3 / 4;
+  padding: 6px;
+  border: 1px solid #26323f;
+  background-color: #0c1117;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.carta-memoria.verso:hover {
+  border-color: #ff4655;
+}
+
+.carta-memoria.frente {
+  background-color: #131b24;
+  cursor: default;
+}
+
+.carta-memoria svg {
+  width: 60%;
+  height: auto;
+  margin-bottom: 4px;
+}
+
+.carta-memoria .nome-agente {
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.carta-memoria .funcao-agente {
+  font-size: 12px;
+  text-transform: uppercase;
+}

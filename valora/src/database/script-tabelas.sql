@@ -68,3 +68,9 @@ CREATE TABLE IF NOT EXISTS jogo_memoria (
         REFERENCES usuario(id)
         ON DELETE CASCADE
 );
+
+-- ----------------------------------------------------------------------------
+-- Usuário inicial para teste de login
+-- ----------------------------------------------------------------------------
+INSERT IGNORE INTO usuario (nome, nick, email, senha, rank_atual, pontos_rr)
+VALUES ('Jett', 'Jett_BR#1234', 'jett@email.com', '123456', 'Platina 2', 47);

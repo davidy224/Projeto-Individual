@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Valora - Jogo da Memória</title>
+  <link rel="stylesheet" href="css/painel.css">
+</head>
+<body>
+
+  <div class="painel">
+    <nav class="menu-lateral">
+      <a class="marca" href="index.html">VALORA</a>
+      <div class="saudacao">Bem-vindo, <b id="nick">Jett_BR</b></div>
+      <a class="item-menu" href="dashboard.html">Dashboard</a>
+      <a class="item-menu" href="partidas.html">Cadastrar partida</a>
+      <a class="item-menu ativo" href="memoria.html">Jogo da memória</a>
+      <a class="item-menu sair" href="index.html" id="btnSair">Sair</a>
+    </nav>
+
+    <main class="conteudo-principal">
+      <h2>Jogo da memória</h2>
+      <p class="subtitulo">Encontre os pares de agentes com o menor número de jogadas.</p>
+
+      <div class="caixa caixa-memoria">
+        <div class="grade-3">
+          <div class="centralizado">
+            <div class="rotulo">Jogadas</div>
+            <div class="valor-grande" id="mmv">0</div>
+          </div>
+          <div class="centralizado">
+            <div class="rotulo">Pares</div>
+            <div class="valor-grande destaque-vermelho" id="mpr">0/8</div>
+          </div>
+          <div class="centralizado">
+            <div class="rotulo">Melhor partida</div>
+            <div class="valor-grande" id="mbs">-</div>
+          </div>
+        </div>
+
+        <div class="grade-memoria" id="mgrid"></div>
+        <div class="aviso centralizado" id="mmsg"></div>
+        <button class="botao-acao" id="mre">Novo jogo</button>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/agentes.js"></script>
+  <script src="js/memoria.js"></script>
+</body>
+</html>

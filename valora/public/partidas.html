@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Valora - Cadastrar Partida</title>
+  <link rel="stylesheet" href="css/painel.css">
+</head>
+<body>
+
+  <div class="painel">
+    <nav class="menu-lateral">
+      <a class="marca" href="index.html">VALORA</a>
+      <div class="saudacao">Bem-vindo, <b id="nick">Jett_BR</b></div>
+      <a class="item-menu" href="dashboard.html">Dashboard</a>
+      <a class="item-menu ativo" href="partidas.html">Cadastrar partida</a>
+      <a class="item-menu" href="memoria.html">Jogo da memória</a>
+      <a class="item-menu sair" href="index.html" id="btnSair">Sair</a>
+    </nav>
+
+    <main class="conteudo-principal">
+      <h2>Cadastrar partida</h2>
+      <p class="subtitulo">Registre os dados da sua última partida.</p>
+
+      <div class="caixa caixa-formulario">
+        <div class="topo-agente">
+          <div id="apv" class="icone-agente"></div>
+          <div>
+            <div class="rotulo">Agente selecionado</div>
+            <div class="valor-grande" id="apn">Jett</div>
+          </div>
+        </div>
+
+        <div class="linha-campos">
+          <div>
+            <label for="m1">Mapa</label>
+            <select id="m1">
+              <option>Ascent</option>
+              <option>Bind</option>
+              <option>Haven</option>
+              <option>Split</option>
+              <option>Lotus</option>
+              <option>Sunset</option>
+            </select>
+          </div>
+          <div>
+            <label for="a1">Agente</label>
+            <select id="a1">
+              <option>Jett</option>
+              <option>Reyna</option>
+              <option>Phoenix</option>
+              <option>Sage</option>
+              <option>Killjoy</option>
+              <option>Omen</option>
+              <option>Brimstone</option>
+              <option>Sova</option>
+            </select>
+          </div>
+          <div>
+            <label for="r1">Resultado</label>
+            <select id="r1">
+              <option>Vitória</option>
+              <option>Derrota</option>
+            </select>
+          </div>
+          <div>
+            <label for="rd1">Rounds (ex.: 13 x 9)</label>
+            <input id="rd1" type="text" placeholder="13 x 9">
+          </div>
+          <div>
+            <label for="k1">Kills</label>
+            <input id="k1" type="number" min="0" placeholder="21">
+          </div>
+          <div>
+            <label for="d1">Mortes</label>
+            <input id="d1" type="number" min="0" placeholder="12">
+          </div>
+          <div>
+            <label for="as1">Assistências</label>
+            <input id="as1" type="number" min="0" placeholder="5">
+          </div>
+          <div>
+            <label for="dt1">Data</label>
+            <input id="dt1" type="date">
+          </div>
+          <div>
+            <label for="r2">Rank</label>
+            <select id="r2">
+              <option>Ferro 1</option>
+              <option>Ferro 2</option>
+              <option>Ferro 3</option>
+              <option>Bronze 1</option>
+              <option>Bronze 2</option>
+              <option>Bronze 3</option>
+              <option>Prata 1</option>
+              <option>Prata 2</option>
+              <option>Prata 3</option>
+              <option>Ouro 1</option>
+              <option>Ouro 2</option>
+              <option>Ouro 3</option>
+              <option>Platina 1</option>
+              <option selected>Platina 2</option>
+              <option>Platina 3</option>
+              <option>Diamante 1</option>
+              <option>Diamante 2</option>
+              <option>Diamante 3</option>
+              <option>Ascendente 1</option>
+              <option>Ascendente 2</option>
+              <option>Ascendente 3</option>
+              <option>Imortal 1</option>
+              <option>Imortal 2</option>
+              <option>Imortal 3</option>
+              <option>Radiante</option>
+            </select>
+          </div>
+          <div>
+            <label for="rr1">Pontos ganhos ou perdidos (RR)</label>
+            <input id="rr1" type="number" step="1" placeholder="+21 ou -18">
+          </div>
+        </div>
+
+        <button class="botao-acao" id="bs">Salvar partida</button>
+        <div class="aviso" id="ts"></div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/agentes.js"></script>
+  <script src="js/partidas.js"></script>
+</body>
+</html>
