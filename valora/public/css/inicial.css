@@ -172,3 +172,16 @@ button {
 .rodape a {
   color: white;
 }
+
+/* Validação de campos */
+.campo-erro {
+  border: 2px solid #ff4655;
+  outline: none;
+}
+
+.mensagem-erro-campo {
+  color: #ff4655;
+  font-size: 13px;
+  margin-top: 4px;
+  display: block;
+}
