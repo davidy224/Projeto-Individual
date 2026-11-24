@@ -1,16 +1,7 @@
--- ============================================================================
--- PROJETO INDIVIDUAL: VALORA (VALORANT TRACKER & JOGO DA MEMÓRIA)
--- Script de criação do Banco de Dados e Tabelas (MySQL)
--- ============================================================================
-
 SET NAMES utf8mb4;
 CREATE DATABASE IF NOT EXISTS valora CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE valora;
 
--- ----------------------------------------------------------------------------
--- 1. Tabela USUARIO
--- Armazena os dados cadastrais do jogador, seu Rank atual e seus Pontos (RR).
--- ----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS usuario (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(80) NOT NULL,
@@ -23,10 +14,6 @@ CREATE TABLE IF NOT EXISTS usuario (
     CONSTRAINT chk_pontos_rr CHECK (pontos_rr >= 0)
 );
 
--- ----------------------------------------------------------------------------
--- 2. Tabela PARTIDA
--- Registra cada partida competitiva jogada pelo usuário (Relacionamento 1:N).
--- ----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS partida (
     id INT PRIMARY KEY AUTO_INCREMENT,
     fk_usuario INT NOT NULL,
@@ -54,10 +41,6 @@ CREATE TABLE IF NOT EXISTS partida (
         ON DELETE CASCADE
 );
 
--- ----------------------------------------------------------------------------
--- 3. Tabela JOGO_MEMORIA
--- Registra cada partida concluída no Jogo da Memória dos Agentes (1:N).
--- ----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS jogo_memoria (
     id INT PRIMARY KEY AUTO_INCREMENT,
     fk_usuario INT NOT NULL,
@@ -70,9 +53,6 @@ CREATE TABLE IF NOT EXISTS jogo_memoria (
         ON DELETE CASCADE
 );
 
--- ----------------------------------------------------------------------------
--- Dados iniciais para o usuário de teste
--- ----------------------------------------------------------------------------
 INSERT IGNORE INTO usuario (id, nome, nick, email, senha, rank_atual, pontos_rr)
 VALUES (1, 'Jett', 'Jett_BR#1234', 'jett@email.com', '123456', 'Platina 2', 47);
 

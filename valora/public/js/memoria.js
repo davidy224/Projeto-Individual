@@ -1,10 +1,10 @@
 var idUsuario = Number(sessionStorage.ID_USUARIO) || 1;
-var mc = [];
-var mo = [];
-var mm = 0;
-var mp = 0;
-var mlock = false;
-var mbest = 0;
+var cartas = [];
+var cartasAbertas = [];
+var quantidadeJogadas = 0;
+var paresEncontrados = 0;
+var bloqueia = false;
+var melhorPontu = 0;
 
 function carregarMelhorPartidaBanco() {
   fetch("/memoria/estatisticas/" + idUsuario)
@@ -16,8 +16,8 @@ function carregarMelhorPartidaBanco() {
     })
     .then(function (dados) {
       if (dados && dados.melhor_partida) {
-        mbest = Number(dados.melhor_partida);
-        document.getElementById("mbs").textContent = mbest;
+        melhorPontu = Number(dados.melhor_partida);
+        document.getElementById("mbs").textContent = melhorPontu;
       }
     })
     .catch(function (erro) {
@@ -44,8 +44,8 @@ function salvarPartidaMemoriaBanco(jogadas) {
     })
     .then(function (dados) {
       if (dados && dados.melhor_partida) {
-        mbest = Number(dados.melhor_partida);
-        document.getElementById("mbs").textContent = mbest;
+        melhorPontu = Number(dados.melhor_partida);
+        document.getElementById("mbs").textContent = melhorPontu;
       }
     })
     .catch(function (erro) {
@@ -57,7 +57,7 @@ function mdraw() {
   var g = document.getElementById("mgrid");
   g.innerHTML = "";
 
-  mc.forEach(function (c, i) {
+  cartas.forEach(function (c, i) {
     var b = document.createElement("button");
 
     if (c.o || c.d) {
@@ -93,9 +93,9 @@ function mdraw() {
     g.appendChild(b);
   });
 
-  document.getElementById("mmv").textContent = mm;
-  document.getElementById("mpr").textContent = mp + "/8";
-  document.getElementById("mbs").textContent = mbest || "-";
+  document.getElementById("mmv").textContent = quantidadeJogadas;
+  document.getElementById("mpr").textContent = paresEncontrados + "/8";
+  document.getElementById("mbs").textContent = melhorPontu || "-";
 }
 
 function mnew() {
@@ -112,11 +112,11 @@ function mnew() {
     d[j] = t;
   }
 
-  mc = d;
-  mo = [];
-  mm = 0;
-  mp = 0;
-  mlock = false;
+  cartas = d;
+  cartasAbertas = [];
+  quantidadeJogadas = 0;
+  paresEncontrados = 0;
+  bloqueia = false;
 
   var m = document.getElementById("mmsg");
   m.style.color = "#9aa6b2";
@@ -125,45 +125,45 @@ function mnew() {
 }
 
 function mflip(i) {
-  var c = mc[i];
-  if (mlock || c.o || c.d) {
+  var c = cartas[i];
+  if (bloqueia || c.o || c.d) {
     return;
   }
 
   c.o = true;
-  mo.push(i);
+  cartasAbertas.push(i);
 
-  if (mo.length === 2) {
-    mm++;
-    var a = mc[mo[0]];
-    var b = mc[mo[1]];
+  if (cartasAbertas.length === 2) {
+    quantidadeJogadas ++;
+    var a = cartas[cartasAbertas[0]];
+    var b = cartas[cartasAbertas[1]];
 
     if (a.a.n === b.a.n) {
       a.d = true;
       b.d = true;
       a.o = false;
       b.o = false;
-      mo = [];
-      mp++;
+      cartasAbertas = [];
+      paresEncontrados++;
 
-      if (mp === 8) {
-        var novo = !mbest || mm < mbest;
+      if (paresEncontrados === 8) {
+        var novo = !melhorPontu || quantidadeJogadas < melhorPontu;
         if (novo) {
-          mbest = mm;
+          melhorPontu = quantidadeJogadas;
         }
-        salvarPartidaMemoriaBanco(mm);
+        salvarPartidaMemoriaBanco(quantidadeJogadas);
         var m = document.getElementById("mmsg");
         m.style.color = "#1fc99a";
-        m.textContent = "Vitória! Todos os pares em " + mm + " jogadas." + (novo ? " Nova melhor partida salva!" : " Partida salva!");
+        m.textContent = "Vitória! Todos os pares em " + quantidadeJogadas + " jogadas." + (novo ? " Nova melhor partida salva!" : " Partida salva!");
       }
     } else {
-      mlock = true;
+      bloqueia = true;
       mdraw();
       setTimeout(function () {
         a.o = false;
         b.o = false;
-        mo = [];
-        mlock = false;
+        cartasAbertas = [];
+        bloqueia = false;
         mdraw();
       }, 800);
       return;
