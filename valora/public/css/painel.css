@@ -88,6 +88,21 @@ h3 {
   justify-content: center;
 }
 
+/* Layout para páginas com título + formulário (ex: Cadastrar Partida) */
+.conteudo-pagina {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Histórico com scroll interno ao passar de 5 partidas */
+.lista-historico-scroll {
+  max-height: 260px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #ff4655 #26323f;
+}
+
 .conteudo-principal h2 {
   font-size: 32px;
   margin-bottom: 4px;
