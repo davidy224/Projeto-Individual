@@ -1,8 +1,7 @@
 var formLogin = document.getElementById("formLogin");
 
-function temCaractereEspecial(senha) {
-  return ["@", "#", "$", "%"].some(function(c) { return senha.includes(c); });
-}
+var vtemail = ["@"];
+var vtsenha = ["@", "#", "$", "%"];
 
 function mostrarErro(inputId, erroId, mensagem) {
   var input = document.getElementById(inputId);
@@ -31,13 +30,21 @@ formLogin.addEventListener("submit", function(evento) {
   if (!emailVar) {
     mostrarErro("email", "erroEmail", "Preencha o e-mail.");
     valido = false;
+  } else if (!vtemail.some(function(c) { return emailVar.includes(c); })) {
+    mostrarErro("email", "erroEmail", "Coloque um email válido!");
+    valido = false;
   }
 
   if (!senhaVar) {
     mostrarErro("senha", "erroSenha", "Preencha a senha.");
     valido = false;
-  } else if (!temCaractereEspecial(senhaVar)) {
-    mostrarErro("senha", "erroSenha", "A senha deve conter pelo menos um caractere especial: @ # $ %");
+  } else if (
+      !senhaVar.includes("@") &&
+      !senhaVar.includes("#") &&
+      !senhaVar.includes("$") &&
+      !senhaVar.includes("%")
+    ) {
+    mostrarErro("senha", "erroSenha", "Coloque um caractere especial!");
     valido = false;
   }
 
